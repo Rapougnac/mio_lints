@@ -72,7 +72,7 @@ class HeaderLintRule extends DartLintRule {
     _s['srcHeader'] = srcHeader;
     final header = _makeComment(rawContents);
     final trailingLines =
-        '\n' * (src.substring(srcHeader.length).isEmpty ? 1 + 1 : 1);
+        '\n' * (src.substring(srcHeader.length).isNotEmpty ? 1 + 1 : 1);
 
     if (!_matchHeader(
       _stripExclamations(srcHeader.trim()),
@@ -107,7 +107,7 @@ class HeaderLintRule extends DartLintRule {
       reporter.reportErrorForOffset(
         _code!,
         offset,
-        (srcHeader + trailingLines).length,
+        srcHeader.length,
       );
       _s['header'] = srcHeader.trim() + trailingLines;
     }
