@@ -95,7 +95,7 @@ class HeaderLintRule extends DartLintRule {
         srcHeader.length,
       );
 
-      _s['header'] = '${_makeHeader(header, defaultTemplates)}\n';
+      _s['header'] = '${_makeHeader(header, defaultTemplates)}$trailingLines';
     } else if (!srcHeader.startsWith('/*') ||
         RegExp(r'\n*$').firstMatch(srcHeader)?.group(0) != trailingLines) {
       _code = LintCode(
