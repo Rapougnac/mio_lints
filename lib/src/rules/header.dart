@@ -52,7 +52,8 @@ class HeaderLintRule extends DartLintRule {
       throw StateError('Either text or filePath must be provided');
     }
 
-    projectRoot ??= (_findAnalysisOptionsFile(File.fromUri(resolver.source.uri)).parent);
+    projectRoot ??=
+        (_findAnalysisOptionsFile(File.fromUri(resolver.source.uri)).parent);
 
     final rawContents = text ?? file.readAsStringSync().trimRight();
 
@@ -89,10 +90,10 @@ class HeaderLintRule extends DartLintRule {
             : 'Add the header to match the expected template',
       );
 
-      reporter.reportErrorForOffset(
-        _code!,
-        offset,
-        srcHeader.length,
+      reporter.atOffset(
+        offset: offset,
+        length: srcHeader.length,
+        errorCode: _code!,
       );
 
       _s['header'] = '${_makeHeader(header, defaultTemplates)}$trailingLines';
@@ -104,10 +105,10 @@ class HeaderLintRule extends DartLintRule {
         correctionMessage: 'Format the header correctly',
       );
 
-      reporter.reportErrorForOffset(
-        _code!,
-        offset,
-        srcHeader.length,
+      reporter.atOffset(
+        offset: offset,
+        length: srcHeader.length,
+        errorCode: _code!,
       );
       _s['header'] = srcHeader.trim() + trailingLines;
     }
